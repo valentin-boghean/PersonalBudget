@@ -8,15 +8,19 @@ namespace Tema8.PersonalBudget
 {
     public class Cont
     {
-        public int ID;
-        public string Nume;         //Numele detinatorului contului       
-        public string Detalii;      //Detalii despre detinatorul contului
-        public string Moneda;       //Tipul monedei
-        public float Venit;         //Venitul Detinatorului
-        public float Cheltuieli;    //Cheltuielile Detinatorului
-        public float Economii;      //Economiile Detinatorului
-        public float Sold;          //Soldul bancar fara Economiii
-        public Boolean Status = true;//Cont inchis sau deschis
+        public int ID { get; set; } = 0;
+        public string Nume { get; set; }         //Numele detinatorului contului
+        public string Prenume { get; set; }
+
+        public string NumeComplet { get { return Nume + " " + Prenume; } }
+        public string Detalii { get; set; }      //Detalii despre detinatorul contului
+        public string Moneda { get; set; }       //Tipul monedei
+        public string Tranzactii { get; set; }   //Istoricul Tranzactiilor
+        public float Venit { get; set; }         //Venitul Detinatorului
+        public float Cheltuieli { get; set; }    //Cheltuielile Detinatorului
+        public float Economii { get; set; }      //Economiile Detinatorului
+        public float Sold { get; set; }          //Soldul bancar fara Economiii
+        public Boolean Status = true;            //Cont inchis sau deschis
         public string Afisare()
         {
             string afisare;
@@ -58,7 +62,9 @@ namespace Tema8.PersonalBudget
                         ID = Convert.ToInt32(sir);
                         break;
                     case 1:
-                        Nume = sir;
+                        string[] temp = sir.Split(' ');
+                        Nume = temp[0];
+                        Prenume = temp[1];
                         break;
                     case 2:
                         Detalii = sir;
@@ -86,11 +92,13 @@ namespace Tema8.PersonalBudget
                 i++;
             }
         }
-        public Cont(int id, string nume,string detalii, string moneda,
+        public Cont(int id, string numecomplet,string detalii, string moneda,
             float sold, float venit, float cheltuieli, float economii)
         {
             ID = id;
-            Nume = nume;
+            string[] temp = numecomplet.Split(' ');
+            Nume = temp[0];
+            Prenume = temp[1];
             Detalii = detalii;
             Moneda = moneda;
             Sold = sold;
