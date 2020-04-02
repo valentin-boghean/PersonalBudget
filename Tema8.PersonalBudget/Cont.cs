@@ -8,7 +8,9 @@ namespace Tema8.PersonalBudget
 {
     public class Cont
     {
-        public int ID { get; set; } = 0;
+        public static int IdUltimCont { get; set; } = 0;
+
+        public int IdCont { get; set; }
         public string Nume { get; set; }         //Numele detinatorului contului
         public string Prenume { get; set; }
 
@@ -19,7 +21,7 @@ namespace Tema8.PersonalBudget
         public float Venit { get; set; }         //Venitul Detinatorului
         public float Cheltuieli { get; set; }    //Cheltuielile Detinatorului
         public float Economii { get; set; }      //Economiile Detinatorului
-        public float Sold { get; set; }          //Soldul bancar fara Economiii
+        public float Sold { get { return Venit - Cheltuieli; } set { Sold = value; } }          //Soldul bancar fara Economiii
         public Boolean Status = true;            //Cont inchis sau deschis
         public string Afisare()
         {
@@ -44,22 +46,37 @@ namespace Tema8.PersonalBudget
         {
             Nume = string.Empty;           
             Moneda = string.Empty;
-            Detalii = String.Empty;
+            Detalii = string.Empty;
+            IdCont = IdUltimCont;
+            IdUltimCont++;
 
         }
 
+        public Cont(string _nume, string _prenume, int _venit, int _cheltuieli)
+        {
+           
+            IdCont = IdUltimCont;
+            IdUltimCont++;
+            Nume = _nume;
+            Prenume = _prenume;
+            Venit = (float)_venit;
+            Cheltuieli = (float)_cheltuieli;
+        }
         // Constructorul pentru preluarea din fisier
         public Cont(string _SirInput)
         {
+            
+            IdCont = IdUltimCont;
+            IdUltimCont++;
             string[] SirInput = new string[_SirInput.Length];
             SirInput = _SirInput.Split(',');
-            int i = 0;
+            int i = 1;
             foreach(string sir in SirInput)
             {
                 switch(i)
                 {
                     case 0:
-                        ID = Convert.ToInt32(sir);
+                        IdUltimCont ++;
                         break;
                     case 1:
                         string[] temp = sir.Split(' ');
@@ -92,10 +109,12 @@ namespace Tema8.PersonalBudget
                 i++;
             }
         }
-        public Cont(int id, string numecomplet,string detalii, string moneda,
+        public Cont(string numecomplet,string detalii, string moneda,
             float sold, float venit, float cheltuieli, float economii)
         {
-            ID = id;
+            
+            IdCont = IdUltimCont;
+            IdUltimCont++;
             string[] temp = numecomplet.Split(' ');
             Nume = temp[0];
             Prenume = temp[1];
@@ -105,6 +124,13 @@ namespace Tema8.PersonalBudget
             Venit = venit;
             Cheltuieli = cheltuieli;
             Economii = economii;
+        }
+
+        public string ConversieLaSir()
+        {
+            string s = string.Format("{0} are {1} {2} in contul cu Id {5}. Venitul este {3} si cheltuielile sunt: {4}  ", NumeComplet, Sold, Moneda, Venit, Cheltuieli,IdCont);
+            return s;
+        
         }
     }
 }
