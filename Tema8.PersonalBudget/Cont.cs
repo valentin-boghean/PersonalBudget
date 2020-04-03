@@ -8,21 +8,22 @@ namespace Tema8.PersonalBudget
 {
     public class Cont
     {
+        private const char SEPARATOR_PRINCIPAL_FISIER = ';';
         public static int IdUltimCont { get; set; } = 0;
-
+        
         public int IdCont { get; set; }
         public string Nume { get; set; }         //Numele detinatorului contului
         public string Prenume { get; set; }
 
         public string NumeComplet { get { return Nume + " " + Prenume; } }
         public string Detalii { get; set; }      //Detalii despre detinatorul contului
-        public string Moneda { get; set; }       //Tipul monedei
-        public string Tranzactii { get; set; }   //Istoricul Tranzactiilor
+        //public string Tranzactii { get; set; }   //Istoricul Tranzactiilor
         public float Venit { get; set; }         //Venitul Detinatorului
         public float Cheltuieli { get; set; }    //Cheltuielile Detinatorului
         public float Economii { get; set; }      //Economiile Detinatorului
         public float Sold { get { return Venit - Cheltuieli; } set { Sold = value; } }          //Soldul bancar fara Economiii
         public Boolean Status = true;            //Cont inchis sau deschis
+        public Valuta Moneda { get; set; }
         public string Afisare()
         {
             string afisare;
@@ -45,7 +46,6 @@ namespace Tema8.PersonalBudget
         public Cont()
         {
             Nume = string.Empty;           
-            Moneda = string.Empty;
             Detalii = string.Empty;
             IdCont = IdUltimCont;
             IdUltimCont++;
@@ -66,42 +66,47 @@ namespace Tema8.PersonalBudget
         public Cont(string _SirInput)
         {
             
-            IdCont = IdUltimCont;
+           
             IdUltimCont++;
             string[] SirInput = new string[_SirInput.Length];
-            SirInput = _SirInput.Split(',');
-            int i = 1;
-            foreach(string sir in SirInput)
+            SirInput = _SirInput.Split(';');
+            int i = 0;
+            int temp;
+            foreach (string sir in SirInput)
             {
                 switch(i)
                 {
                     case 0:
+                     
+                        Int32.TryParse(sir, out temp);
+                        IdCont = temp;
                         IdUltimCont ++;
                         break;
                     case 1:
-                        string[] temp = sir.Split(' ');
-                        Nume = temp[0];
-                        Prenume = temp[1];
+                        Nume = sir;
                         break;
                     case 2:
-                        Detalii = sir;
-                        
-                        break;
-                    case 3:
-                        Moneda = sir;
+                        Prenume = sir;
                         break;
                     case 4:
-                        Sold = Convert.ToInt32(sir);
+                        Moneda = (Valuta)Int32.Parse(sir);
+                        break;
+                    case 3:
+                        
+                        Int32.TryParse(sir, out temp);
+                        Sold = temp;
                         break;
                     case 5:
-                        Venit = Convert.ToInt32(sir);
+                      
+                        Int32.TryParse(sir, out temp);
+                        Venit = temp;
                         break;
                     case 6:
-                        Cheltuieli = Convert.ToInt32(sir);
+               
+                        Int32.TryParse(sir, out temp);
+                        Cheltuieli = temp;
                         break;
-                    case 7:
-                        Economii = Convert.ToInt32(sir);
-                        break;
+             
                     default:
                         break;
 
@@ -119,7 +124,7 @@ namespace Tema8.PersonalBudget
             Nume = temp[0];
             Prenume = temp[1];
             Detalii = detalii;
-            Moneda = moneda;
+            Moneda = (Valuta)Int32.Parse(moneda);
             Sold = sold;
             Venit = venit;
             Cheltuieli = cheltuieli;
@@ -128,9 +133,17 @@ namespace Tema8.PersonalBudget
 
         public string ConversieLaSir()
         {
-            string s = string.Format("{0} are {1} {2} in contul cu Id {5}. Venitul este {3} si cheltuielile sunt: {4}  ", NumeComplet, Sold, Moneda, Venit, Cheltuieli,IdCont);
+            string s = string.Format("{0,-2}{1,10}{2,10}{3,10}{4,10}{5,15}{6,15}", IdCont, Nume,Prenume, Sold, Moneda, Venit, Cheltuieli);
+            return s;        
+        }
+
+        public string ConversieLaSir_PentruFisier()
+        {
+            
+            string s = string.Format("{1}{0}{2}{0}{3}{0}{4}{0}{5}{0}{6}{0}{7}",
+                SEPARATOR_PRINCIPAL_FISIER, IdCont.ToString(), (Nume ?? " NECUNOSCUT "), (Prenume ?? " NECUNOSCUT "), Sold, Moneda,Venit,Cheltuieli);
+
             return s;
-        
         }
     }
 }
