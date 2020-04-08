@@ -18,6 +18,7 @@ namespace Tema8.PersonalBudget
             int nrConturi;
             conturi = adminConturi.GetConturi(out nrConturi);
             Cont.IdUltimCont = nrConturi;
+          
             string optiune;
             do
             {
@@ -26,6 +27,8 @@ namespace Tema8.PersonalBudget
                 Console.WriteLine("C. Compara doua conturi");
                 Console.WriteLine("M. Modificare Cont");
                 Console.WriteLine("X. Iesire Program");
+                Console.WriteLine();
+                Console.Write("Dati optiunea: ");
                 optiune = Console.ReadLine();
                 switch (optiune.ToUpper())
                 {
@@ -52,8 +55,33 @@ namespace Tema8.PersonalBudget
                             Console.WriteLine("Conturile nu au acelasi detinator");
                         break;
                     case "M":
+                        Console.WriteLine("1. Modificati nume si prenume.");
+                        Console.WriteLine("2. Stergeti cont");
+                        int opt;
+                        Int32.TryParse(Console.ReadLine(), out opt);
+                        switch(opt)
+                        {
+                            case 1:
+                                AfisareConturi(conturi, nrConturi);
+                                Console.Write("Dati ID: ");
+                                int id;
+                                Int32.TryParse(Console.ReadLine(), out id);
+                                ModificareNume(conturi[id]);
+                                break;
+                            case 2:
+                                AfisareConturi(conturi, nrConturi);
+                                Console.Write("Dati ID: ");
+                               /// int id;
+                                Int32.TryParse(Console.ReadLine(), out id);                              
+                                StergeCont(conturi,ref nrConturi, id);
+                                break;
+                            default:
+                                break;
+                        }
+                        
+
                         break;
-                    case "X":
+                    case "X":Environment.Exit(0);
                         break;
                     default:
                         Console.WriteLine("Optiune inexistenta");
@@ -111,6 +139,29 @@ namespace Tema8.PersonalBudget
             if (c1.Nume == c2.Nume && c1.Prenume == c2.Prenume)
                 return true;
             return false;
+        }
+
+        public static Cont ModificareNume(Cont c1)
+
+        {
+            Console.Write("Dati nume nou: ");
+            c1.Nume = Console.ReadLine();
+            Console.Write("Dati prenume nou: ");
+            c1.Prenume = Console.ReadLine();
+            return c1;
+        }
+
+        public static void StergeCont(Cont[] conturi,ref int nrConturi, int id)
+        {
+            for (int i = id; i < nrConturi - 1; i++)
+            {
+                conturi[id] = conturi[++id];
+                conturi[id].IdCont = id-1;
+            }
+            
+            nrConturi--;
+            Cont.IdUltimCont = nrConturi;
+
         }
 
     }

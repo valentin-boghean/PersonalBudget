@@ -52,7 +52,6 @@ namespace NivelAccesDate
                 {
                     string line;
                     nrConturi = 0;
-
                     
                     while ((line = sr.ReadLine()) != null)
                     {

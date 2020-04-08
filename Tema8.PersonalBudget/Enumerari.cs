@@ -11,7 +11,7 @@ namespace Tema8.PersonalBudget
         USD = 1,
         EUR = 2,
         GBP = 3,
-        RON = 4
-
+        RON = 4,
+        CAD = 5
     };
 }

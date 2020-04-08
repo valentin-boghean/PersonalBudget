@@ -8,6 +8,14 @@ namespace Tema8.PersonalBudget
 {
     public class Cont
     {
+        private const int ID = 0;
+        private const int NUME = 1;
+        private const int PRENUME = 2;
+        private const int SOLD = 3;
+        private const int MONEDA = 4;
+        private const int VENITURI = 5;
+        private const int CHELTUIELI = 6;
+
         private const char SEPARATOR_PRINCIPAL_FISIER = ';';
         public static int IdUltimCont { get; set; } = 0;
         
@@ -21,7 +29,7 @@ namespace Tema8.PersonalBudget
         public float Venit { get; set; }         //Venitul Detinatorului
         public float Cheltuieli { get; set; }    //Cheltuielile Detinatorului
         public float Economii { get; set; }      //Economiile Detinatorului
-        public float Sold { get { return Venit - Cheltuieli; } set { Sold = value; } }          //Soldul bancar fara Economiii
+        public float Sold { get ; set; }          //Soldul bancar fara Economiii
         public Boolean Status = true;            //Cont inchis sau deschis
         public Valuta Moneda { get; set; }
         public string Afisare()
@@ -61,26 +69,26 @@ namespace Tema8.PersonalBudget
             Prenume = _prenume;
             Venit = (float)_venit;
             Cheltuieli = (float)_cheltuieli;
+            Sold = Venit - Cheltuieli;
         }
         // Constructorul pentru preluarea din fisier
         public Cont(string _SirInput)
         {
             
-           
             IdUltimCont++;
             string[] SirInput = new string[_SirInput.Length];
             SirInput = _SirInput.Split(';');
-            int i = 0;
+          
+
             int temp;
+            int i = 0;
             foreach (string sir in SirInput)
             {
                 switch(i)
                 {
-                    case 0:
-                     
+                    case 0:      
                         Int32.TryParse(sir, out temp);
-                        IdCont = temp;
-                        IdUltimCont ++;
+                        IdCont = temp;                    
                         break;
                     case 1:
                         Nume = sir;
@@ -89,20 +97,17 @@ namespace Tema8.PersonalBudget
                         Prenume = sir;
                         break;
                     case 4:
-                        Moneda = (Valuta)Int32.Parse(sir);
+                        Moneda = (Valuta)Enum.Parse(typeof(Valuta),sir);
                         break;
-                    case 3:
-                        
+                    case 3:                       
                         Int32.TryParse(sir, out temp);
                         Sold = temp;
                         break;
-                    case 5:
-                      
+                    case 5:                     
                         Int32.TryParse(sir, out temp);
                         Venit = temp;
                         break;
-                    case 6:
-               
+                    case 6:              
                         Int32.TryParse(sir, out temp);
                         Cheltuieli = temp;
                         break;
