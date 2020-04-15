@@ -1,7 +1,7 @@
 ﻿using NivelAccesDate;
 using System.Configuration;
 
-namespace PersonalBudget
+namespace Aplicatie
 {
     public static class StocareFactory
     {
@@ -21,7 +21,6 @@ namespace PersonalBudget
                         return new AdministrareConturi(numeFisier + "." + formatSalvare);
                 }
             }
-
             return null;
         }
     }

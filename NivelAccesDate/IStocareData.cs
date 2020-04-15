@@ -1,4 +1,4 @@
-﻿using LibrarieModele;
+﻿using ContModel;
 using System.Collections.Generic;
 
 namespace NivelAccesDate
@@ -6,7 +6,7 @@ namespace NivelAccesDate
     //definitia interfetei
     public interface IStocareData
     {
-        void AddStudent(Student s);
-        Student[] GetStudenti(out int nrStudenti);
+        void AddCont(Cont s);
+        Cont[] GetConturi(out int nrConturi);
     }
 }

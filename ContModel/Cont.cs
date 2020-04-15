@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tema8.PersonalBudget
+namespace ContModel
 {
     public class Cont
     {

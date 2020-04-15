@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NivelAccesDate;
+using ContModel;
 
-namespace Tema8.PersonalBudget
+namespace PersonalBudget
 {
 
     class Program
@@ -35,12 +36,14 @@ namespace Tema8.PersonalBudget
                     case "L":
                         AfisareConturi(conturi, nrConturi);
                         break;
+
                     case "A":
                         Cont c = CitireContTastatura();
                         conturi[nrConturi] = c;
                         nrConturi++;
                         adminConturi.AddCont(c);
                         break;
+
                     case "C":
                         AfisareConturi(conturi, nrConturi);
                         Console.WriteLine("Dati ID cont 1: ");
@@ -54,6 +57,7 @@ namespace Tema8.PersonalBudget
                         else
                             Console.WriteLine("Conturile nu au acelasi detinator");
                         break;
+
                     case "M":
                         Console.WriteLine("1. Modificati nume si prenume.");
                         Console.WriteLine("2. Stergeti cont");
@@ -77,8 +81,7 @@ namespace Tema8.PersonalBudget
                                 break;
                             default:
                                 break;
-                        }
-                        
+                        }                        
 
                         break;
                     case "X":Environment.Exit(0);
@@ -92,6 +95,7 @@ namespace Tema8.PersonalBudget
                 Console.Clear();
                 
             } while (optiune.ToUpper() != "X");
+            
             Console.ReadLine();
         }
 
@@ -103,12 +107,10 @@ namespace Tema8.PersonalBudget
            
             for (int i = 0; i < nrConturi; i++)
                 Console.WriteLine(conturi[i].ConversieLaSir());
-
         }
 
         public static Cont CitireContTastatura()
-        {
-         
+        {        
             Console.Write("Introduceti numele: ");
             string nume = Console.ReadLine();
             Console.Write("Introduceti prenumele: ");
