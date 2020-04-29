@@ -1,5 +1,5 @@
 ﻿using ContModel;
-using System.Collections.Generic;
+using System.Collections;
 
 namespace NivelAccesDate
 {
@@ -7,6 +7,6 @@ namespace NivelAccesDate
     public interface IStocareData
     {
         void AddCont(Cont s);
-        Cont[] GetConturi(out int nrConturi);
+        ArrayList GetConturi();
     }
 }

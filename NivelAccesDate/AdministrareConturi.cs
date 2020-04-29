@@ -1,14 +1,16 @@
 ﻿using ContModel;
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.IO;
 
 namespace NivelAccesDate
 {
-    //clasa AdministrareStudenti_FisierText implementeaza interfata IStocareData
+    //clasa AdministrareConturi_FisierText implementeaza interfata IStocareData
     public class AdministrareConturi : IStocareData
     {
-        private const int PAS_ALOCARE = 10;
+        private const int ID_PRIMUL_STUDENT = 1;
+        private const int INCREMENT = 1;
+
         string NumeFisier { get; set; }
         public AdministrareConturi(string numeFisier)
         {
@@ -20,15 +22,17 @@ namespace NivelAccesDate
             //instructiunea 'using' va apela sFisierText.Close();
             //using (Stream sFisierText = File.Open(numeFisier, FileMode.OpenOrCreate)) { }
         }
-        public void AddCont(Cont c)
+        public void AddCont(Cont cont)
         {
+            cont.IdCont = GetId();
             try
             {
                 //instructiunea 'using' va apela la final swFisierText.Close();
                 //al doilea parametru setat la 'true' al constructorului StreamWriter indica modul 'append' de deschidere al fisierului
                 using (StreamWriter swFisierText = new StreamWriter(NumeFisier, true))
                 {
-                    swFisierText.WriteLine(c.ConversieLaSir_PentruFisier());
+
+                    swFisierText.WriteLine(cont.ConversieLaSir_PentruFisier());
                 }
             }
             catch (IOException eIO)
@@ -41,9 +45,9 @@ namespace NivelAccesDate
             }
         }
 
-        public Cont[] GetConturi(out int nrConturi)
+        public ArrayList GetConturi()
         {
-            Cont[] conturi = new Cont[PAS_ALOCARE];
+            ArrayList conturi = new ArrayList();
 
             try
             {
@@ -51,15 +55,12 @@ namespace NivelAccesDate
                 using (StreamReader sr = new StreamReader(NumeFisier))
                 {
                     string line;
-                    nrConturi = 0;
-                    
+
+                    //citeste cate o linie si creaza un obiect de tip Cont pe baza datelor din linia citita
                     while ((line = sr.ReadLine()) != null)
                     {
-                        conturi[nrConturi++] = new Cont(line);
-                        if (nrConturi == PAS_ALOCARE)
-                        {
-                            Array.Resize(ref conturi, nrConturi + PAS_ALOCARE);
-                        }
+                        Cont s = new Cont(line);
+                        conturi.Add(s);
                     }
                 }
             }
@@ -73,6 +74,101 @@ namespace NivelAccesDate
             }
 
             return conturi;
+        }
+
+        public Cont GetCont(string nume, string prenume)
+        {
+            try
+            {
+                // instructiunea 'using' va apela sr.Close()
+                using (StreamReader sr = new StreamReader(NumeFisier))
+                {
+                    string line;
+
+                    //citeste cate o linie si creaza un obiect de tip Cont pe baza datelor din linia citita
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        Cont cont = new Cont(line);
+                        if (cont.Nume.Equals(nume) && cont.Prenume.Equals(prenume))
+                            return cont;
+                    }
+                }
+            }
+            catch (IOException eIO)
+            {
+                throw new Exception("Eroare la deschiderea fisierului. Mesaj: " + eIO.Message);
+            }
+            catch (Exception eGen)
+            {
+                throw new Exception("Eroare generica. Mesaj: " + eGen.Message);
+            }
+            return null;
+        }
+
+        public bool UpdateCont(Cont contActualizat)
+        {
+            ArrayList conturi = GetConturi();
+            bool actualizareCuSucces = false;
+            try
+            {
+                //instructiunea 'using' va apela la final swFisierText.Close();
+                //al doilea parametru setat la 'false' al constructorului StreamWriter indica modul 'overwrite' de deschidere al fisierului
+                using (StreamWriter swFisierText = new StreamWriter(NumeFisier, false))
+                {
+                    foreach (Cont stud in conturi)
+                    {
+                        //informatiile despre contul actualizat vor fi preluate din parametrul "contActualizat"
+                        if (stud.IdCont != contActualizat.IdCont)
+                        {
+                            swFisierText.WriteLine(stud.ConversieLaSir_PentruFisier());
+                        }
+                        else
+                        {
+                            swFisierText.WriteLine(contActualizat.ConversieLaSir_PentruFisier());
+                        }
+                    }
+                    actualizareCuSucces = true;
+                }
+            }
+            catch (IOException eIO)
+            {
+                throw new Exception("Eroare la deschiderea fisierului. Mesaj: " + eIO.Message);
+            }
+            catch (Exception eGen)
+            {
+                throw new Exception("Eroare generica. Mesaj: " + eGen.Message);
+            }
+
+            return actualizareCuSucces;
+        }
+
+        private int GetId()
+        {
+            int IdCont = ID_PRIMUL_STUDENT;
+            try
+            {
+                // instructiunea 'using' va apela sr.Close()
+                using (StreamReader sr = new StreamReader(NumeFisier))
+                {
+                    string line;
+
+                    //citeste cate o linie si creaza un obiect de tip Cont pe baza datelor din linia citita
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        Cont s = new Cont(line);
+                        IdCont = s.IdCont + INCREMENT;
+                    }
+                }
+            }
+            catch (IOException eIO)
+            {
+                throw new Exception("Eroare la deschiderea fisierului. Mesaj: " + eIO.Message);
+            }
+            catch (Exception eGen)
+            {
+                throw new Exception("Eroare generica. Mesaj: " + eGen.Message);
+            }
+            return IdCont;
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +23,7 @@ namespace Aplicatie
     public class Formular : Form
     {
         IStocareData adminConturi = StocareFactory.GetAdministratorStocare();
+        
 
         private Label lblNume;
         private Label lblPrenume;
@@ -44,6 +45,8 @@ namespace Aplicatie
 
         public Formular()
         {
+
+
             this.Size = new System.Drawing.Size(600, 500);
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new System.Drawing.Point(100, 100);
@@ -82,7 +85,7 @@ namespace Aplicatie
             lblInfo.Width = LATIME_CONTROL * 3;
             lblInfo.Text = string.Empty;
             lblInfo.Top = DIMENSIUNE_PAS_Y * 5;
-            lblInfo.Height = INALTIME_CONTROL * 2;
+            lblInfo.Height = INALTIME_CONTROL * 10;
             lblInfo.BackColor = Color.Black;
             this.Controls.Add(lblInfo);
 
@@ -111,7 +114,7 @@ namespace Aplicatie
 
             btnAdaugare = new Button();
             btnAdaugare.Width = LATIME_CONTROL;
-            btnAdaugare.Location = new System.Drawing.Point(DIMENSIUNE_PAS_X,DIMENSIUNE_PAS_Y  *4);
+            btnAdaugare.Location = new System.Drawing.Point(DIMENSIUNE_PAS_X, DIMENSIUNE_PAS_Y * 4);
             btnAdaugare.Text = "Adaugati Cont";
             this.Controls.Add(btnAdaugare);
 
@@ -125,95 +128,76 @@ namespace Aplicatie
             btnAdaugare.Click += OnButtonAdaugaClicked;
             this.Controls.Add(btnAdaugare);
 
-            //btnAfisare.Click += OnButtonAfisareClicked;
-            //this.Controls.Add(btnAfisare);
+            btnAfisare.Click += OnButtonAfisareClicked;
+            this.Controls.Add(btnAfisare);
         }
 
         private void OnButtonAdaugaClicked(object sender, EventArgs e)
         {
-          
-            int validare = Validare();
-
-            lblNume.ForeColor = Color.LimeGreen;
-            lblPrenume.ForeColor = Color.LimeGreen;
-            lblVenit.ForeColor = Color.LimeGreen;
-            lblCheltuieli.ForeColor = Color.LimeGreen;
-
-            if (validare == 0)
+            Validare();
+            if (lblNume.ForeColor == Color.Red || lblPrenume.ForeColor == Color.Red || lblVenit.ForeColor == Color.Red || lblCheltuieli.ForeColor == Color.Red)
+                lblInfo.Text = "Datele nu sunt valide";
+            else
 
             {
                 int intVenit;
                 Int32.TryParse(txtVenit.Text, out intVenit);
                 int intCheltuieli;
-                Int32.TryParse(txtVenit.Text, out intCheltuieli);
-                Cont s = new Cont(txtNume.Text, txtPrenume.Text, intVenit,intCheltuieli);
-                
+                Int32.TryParse(txtCheltuieli.Text, out intCheltuieli);
+                Cont s = new Cont(txtNume.Text, txtPrenume.Text, intVenit, intCheltuieli);
 
                 lblInfo.Text = s.ConversieLaSir();
+                Cont.IdUltimCont++;
                 adminConturi.AddCont(s);
-
-            }
-            else
-            {
-
-                switch (validare)
-                {
-                    case 1:
-                        lblNume.ForeColor = Color.Red;
-                        break;
-                    case 2:
-                        lblPrenume.ForeColor = Color.Red;
-                        break;
-                    case 3:
-                        lblVenit.ForeColor = Color.Red;
-                        break;
-                    case 4:
-                        lblCheltuieli.ForeColor = Color.Red;
-                        break;
-                    default:
-                        break;
-                }
-
             }
         }
 
-        /*private void OnButtonAfisareClicked(object sender, EventArgs e)
+        private void OnButtonAfisareClicked(object sender, EventArgs e)
         {
-            int nrConturi;
-            Cont[] conturi = adminConturi.GetConturi(out nrConturi);
-            if (nrConturi > 0)
-            {
-                Cont.IdUltimCont = conturi[nrConturi - 1].IdCont;
-            }
+            lblInfo.Text = string.Empty;
+            ArrayList conturi;
+            conturi = adminConturi.GetConturi();
+            Cont.IdUltimCont = ((Cont)conturi[conturi.Count - 1]).IdCont;
 
-            AfisareConturi(conturi, nrConturi);
+            var header = string.Format("{0,-2}{1,10}{2,10}{3,10}{4,10}{5,15}{6,15}", "ID", "Nume", "Prenume", "Sold", "Valuta", "Venit/Luna", "Cheltuieli");
+            lblInfo.Text = lblInfo.Text + header;
+            lblInfo.Text = lblInfo.Text + "\n-------------------------------------------------------------------------";
+
+            foreach (Cont cont in conturi)
+                lblInfo.Text = lblInfo.Text + "\n" + cont.ConversieLaSir();
+
         }
-        */
 
-        private int Validare()
+
+        private void Validare()
         {
+            lblNume.ForeColor = Color.LimeGreen;
+            lblPrenume.ForeColor = Color.LimeGreen;
+            lblVenit.ForeColor = Color.LimeGreen;
+            lblCheltuieli.ForeColor = Color.LimeGreen;
+
             int intVenit;
             Int32.TryParse(txtVenit.Text, out intVenit);
             int intCheltuieli;
             Int32.TryParse(txtVenit.Text, out intCheltuieli);
             if (txtNume.Text == string.Empty || txtNume.Text.Length > LUNGIME_MAX)
             {
-                return 1;
+                lblNume.ForeColor = Color.Red;
             }
-            else if (txtPrenume.Text == string.Empty || txtPrenume.Text.Length > LUNGIME_MAX)
+            if (txtPrenume.Text == string.Empty || txtPrenume.Text.Length > LUNGIME_MAX)
             {
-                return 2;
+                lblPrenume.ForeColor = Color.Red;
             }
-            else if (txtVenit.Text == string.Empty || txtVenit.Text.Length > LUNGIME_MAX || intVenit < 0)
+            if (txtVenit.Text == string.Empty || txtVenit.Text.Length > LUNGIME_MAX || intVenit < 0)
             {
-                return 3;
+                lblVenit.ForeColor = Color.Red;
             }
-            else if (txtCheltuieli.Text == string.Empty || txtCheltuieli.Text.Length > LUNGIME_MAX || intCheltuieli < 0)
+            if (txtCheltuieli.Text == string.Empty || txtCheltuieli.Text.Length > LUNGIME_MAX || intCheltuieli < 0)
             {
-                return 4;
+                lblCheltuieli.ForeColor = Color.Red;
             }
 
-                return 0;
+
         }
 
     }

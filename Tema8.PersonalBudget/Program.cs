@@ -1,5 +1,5 @@
 ﻿using System;      
-using System.Collections.Generic;   
+using System.Collections;   
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,11 +14,11 @@ namespace PersonalBudget
 
         static void Main(string[] args)
         {
-            Cont[] conturi;
+            ArrayList conturi;
             IStocareData adminConturi = StocareFactory.GetAdministratorStocare();
-            int nrConturi;
-            conturi = adminConturi.GetConturi(out nrConturi);
-            Cont.IdUltimCont = nrConturi;
+          
+            conturi = adminConturi.GetConturi();
+            Cont.IdUltimCont =((Cont)conturi[conturi.Count -1]).IdCont;
           
             string optiune;
             do
@@ -34,18 +34,16 @@ namespace PersonalBudget
                 switch (optiune.ToUpper())
                 {
                     case "L":
-                        AfisareConturi(conturi, nrConturi);
+                        AfisareConturi(conturi);
                         break;
 
                     case "A":
                         Cont c = CitireContTastatura();
-                        conturi[nrConturi] = c;
-                        nrConturi++;
                         adminConturi.AddCont(c);
                         break;
 
                     case "C":
-                        AfisareConturi(conturi, nrConturi);
+                      /*  AfisareConturi(conturi, nrConturi);
                         Console.WriteLine("Dati ID cont 1: ");
                         int id1;
                         Int32.TryParse(Console.ReadLine(), out id1);
@@ -56,6 +54,7 @@ namespace PersonalBudget
                             Console.WriteLine("Conturile au acelasi detinator.");
                         else
                             Console.WriteLine("Conturile nu au acelasi detinator");
+                        */
                         break;
 
                     case "M":
@@ -66,18 +65,18 @@ namespace PersonalBudget
                         switch(opt)
                         {
                             case 1:
-                                AfisareConturi(conturi, nrConturi);
+                                AfisareConturi(conturi);
                                 Console.Write("Dati ID: ");
                                 int id;
                                 Int32.TryParse(Console.ReadLine(), out id);
-                                ModificareNume(conturi[id]);
+                                //ModificareNume(conturi[id]);
                                 break;
                             case 2:
-                                AfisareConturi(conturi, nrConturi);
+                                AfisareConturi(conturi);
                                 Console.Write("Dati ID: ");
                                /// int id;
                                 Int32.TryParse(Console.ReadLine(), out id);                              
-                                StergeCont(conturi,ref nrConturi, id);
+                                StergeCont(conturi, id);
                                 break;
                             default:
                                 break;
@@ -99,14 +98,14 @@ namespace PersonalBudget
             Console.ReadLine();
         }
 
-        public static void AfisareConturi(Cont[] conturi, int nrConturi)
+        public static void AfisareConturi(ArrayList conturi)
         {
             var header = string.Format("{0,-2}{1,10}{2,10}{3,10}{4,10}{5,15}{6,15}", "ID", "Nume", "Prenume","Sold","Valuta", "Venit/Luna", "Cheltuieli");
             Console.WriteLine("{0}", header);
             Console.WriteLine("-------------------------------------------------------------------------");
            
-            for (int i = 0; i < nrConturi; i++)
-                Console.WriteLine(conturi[i].ConversieLaSir());
+            foreach (Cont cont in conturi)
+                Console.WriteLine(cont.ConversieLaSir());
         }
 
         public static Cont CitireContTastatura()
@@ -153,16 +152,9 @@ namespace PersonalBudget
             return c1;
         }
 
-        public static void StergeCont(Cont[] conturi,ref int nrConturi, int id)
+        public static void StergeCont(ArrayList conturi, int id)
         {
-            for (int i = id; i < nrConturi - 1; i++)
-            {
-                conturi[id] = conturi[++id];
-                conturi[id].IdCont = id-1;
-            }
-            
-            nrConturi--;
-            Cont.IdUltimCont = nrConturi;
+            conturi.Remove(conturi[id]);
 
         }
 
