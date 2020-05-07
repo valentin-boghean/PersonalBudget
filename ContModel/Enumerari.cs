@@ -11,7 +11,8 @@ namespace ContModel
         USD = 1,
         EUR = 2,
         GBP = 3,
-        RON = 4,
-        CAD = 5
+        CAD = 4,
+        RON = 5
+        
     };
 }

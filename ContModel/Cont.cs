@@ -17,7 +17,6 @@ namespace ContModel
         private const int CHELTUIELI = 6;
 
         private const char SEPARATOR_PRINCIPAL_FISIER = ';';
-        public static int IdUltimCont { get; set; } = 0;
         
         public int IdCont { get; set; }
         public string Nume { get; set; }         //Numele detinatorului contului
@@ -55,16 +54,12 @@ namespace ContModel
         {
             Nume = string.Empty;           
             Detalii = string.Empty;
-            IdCont = IdUltimCont;
-            IdUltimCont++;
 
         }
 
         public Cont(string _nume, string _prenume, int _venit, int _cheltuieli)
         {
-           
-            IdCont = IdUltimCont;
-            IdUltimCont++;
+
             Nume = _nume;
             Prenume = _prenume;
             Venit = (float)_venit;
@@ -75,11 +70,8 @@ namespace ContModel
         public Cont(string _SirInput)
         {
             
-            IdUltimCont++;
             string[] SirInput = new string[_SirInput.Length];
             SirInput = _SirInput.Split(';');
-          
-
             int temp;
             int i = 0;
             foreach (string sir in SirInput)
@@ -119,12 +111,11 @@ namespace ContModel
                 i++;
             }
         }
-        public Cont(string numecomplet,string detalii, string moneda,
+        /*public Cont(string numecomplet,string detalii, string moneda,
             float sold, float venit, float cheltuieli, float economii)
         {
             
-            IdCont = IdUltimCont;
-            IdUltimCont++;
+            IdCont =
             string[] temp = numecomplet.Split(' ');
             Nume = temp[0];
             Prenume = temp[1];
@@ -135,6 +126,7 @@ namespace ContModel
             Cheltuieli = cheltuieli;
             Economii = economii;
         }
+        */
 
         public string ConversieLaSir()
         {

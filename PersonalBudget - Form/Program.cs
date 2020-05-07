@@ -146,8 +146,7 @@ namespace Aplicatie
                 Int32.TryParse(txtCheltuieli.Text, out intCheltuieli);
                 Cont s = new Cont(txtNume.Text, txtPrenume.Text, intVenit, intCheltuieli);
 
-                lblInfo.Text = s.ConversieLaSir();
-                Cont.IdUltimCont++;
+                lblInfo.Text = s.ConversieLaSir();             
                 adminConturi.AddCont(s);
             }
         }

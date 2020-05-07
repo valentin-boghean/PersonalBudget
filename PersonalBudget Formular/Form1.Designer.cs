@@ -42,13 +42,25 @@ namespace PersonalBudget_Formular
             this.btnAfisare = new System.Windows.Forms.Button();
             this.lblInfo = new System.Windows.Forms.RichTextBox();
             this.lblTitlu = new System.Windows.Forms.Label();
+            this.btnCauta = new System.Windows.Forms.Button();
+            this.btnModifica = new System.Windows.Forms.Button();
+            this.rbtUSD = new System.Windows.Forms.RadioButton();
+            this.lblValuta = new System.Windows.Forms.Label();
+            this.rbtEUR = new System.Windows.Forms.RadioButton();
+            this.rbtGBP = new System.Windows.Forms.RadioButton();
+            this.rbtCAD = new System.Windows.Forms.RadioButton();
+            this.rbtRON = new System.Windows.Forms.RadioButton();
+            this.ckbEconomii = new System.Windows.Forms.CheckBox();
+            this.lblEconomii = new System.Windows.Forms.Label();
+            this.txtEconomii = new System.Windows.Forms.TextBox();
+            this.btnResetare = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblNume
             // 
             this.lblNume.AutoSize = true;
             this.lblNume.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblNume.Location = new System.Drawing.Point(43, 48);
+            this.lblNume.Location = new System.Drawing.Point(12, 48);
             this.lblNume.Name = "lblNume";
             this.lblNume.Size = new System.Drawing.Size(49, 17);
             this.lblNume.TabIndex = 0;
@@ -58,7 +70,7 @@ namespace PersonalBudget_Formular
             // 
             this.lblPrenume.AutoSize = true;
             this.lblPrenume.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblPrenume.Location = new System.Drawing.Point(43, 80);
+            this.lblPrenume.Location = new System.Drawing.Point(12, 80);
             this.lblPrenume.Name = "lblPrenume";
             this.lblPrenume.Size = new System.Drawing.Size(72, 17);
             this.lblPrenume.TabIndex = 1;
@@ -68,7 +80,7 @@ namespace PersonalBudget_Formular
             // 
             this.lblVenit.AutoSize = true;
             this.lblVenit.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblVenit.Location = new System.Drawing.Point(43, 111);
+            this.lblVenit.Location = new System.Drawing.Point(12, 111);
             this.lblVenit.Name = "lblVenit";
             this.lblVenit.Size = new System.Drawing.Size(45, 17);
             this.lblVenit.TabIndex = 2;
@@ -78,7 +90,7 @@ namespace PersonalBudget_Formular
             // 
             this.lblCheltuieli.AutoSize = true;
             this.lblCheltuieli.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblCheltuieli.Location = new System.Drawing.Point(43, 140);
+            this.lblCheltuieli.Location = new System.Drawing.Point(12, 140);
             this.lblCheltuieli.Name = "lblCheltuieli";
             this.lblCheltuieli.Size = new System.Drawing.Size(75, 17);
             this.lblCheltuieli.TabIndex = 3;
@@ -86,36 +98,36 @@ namespace PersonalBudget_Formular
             // 
             // txtNume
             // 
-            this.txtNume.Location = new System.Drawing.Point(169, 48);
+            this.txtNume.Location = new System.Drawing.Point(122, 48);
             this.txtNume.Name = "txtNume";
-            this.txtNume.Size = new System.Drawing.Size(100, 22);
+            this.txtNume.Size = new System.Drawing.Size(187, 22);
             this.txtNume.TabIndex = 4;
             // 
             // txtPrenume
             // 
-            this.txtPrenume.Location = new System.Drawing.Point(169, 80);
+            this.txtPrenume.Location = new System.Drawing.Point(122, 80);
             this.txtPrenume.Name = "txtPrenume";
-            this.txtPrenume.Size = new System.Drawing.Size(100, 22);
+            this.txtPrenume.Size = new System.Drawing.Size(187, 22);
             this.txtPrenume.TabIndex = 5;
             // 
             // txtVenit
             // 
-            this.txtVenit.Location = new System.Drawing.Point(169, 111);
+            this.txtVenit.Location = new System.Drawing.Point(122, 111);
             this.txtVenit.Name = "txtVenit";
-            this.txtVenit.Size = new System.Drawing.Size(100, 22);
+            this.txtVenit.Size = new System.Drawing.Size(187, 22);
             this.txtVenit.TabIndex = 6;
             // 
             // txtCheltuieli
             // 
-            this.txtCheltuieli.Location = new System.Drawing.Point(169, 140);
+            this.txtCheltuieli.Location = new System.Drawing.Point(122, 140);
             this.txtCheltuieli.Name = "txtCheltuieli";
-            this.txtCheltuieli.Size = new System.Drawing.Size(100, 22);
+            this.txtCheltuieli.Size = new System.Drawing.Size(187, 22);
             this.txtCheltuieli.TabIndex = 7;
             // 
             // btnAdauga
             // 
             this.btnAdauga.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnAdauga.Location = new System.Drawing.Point(169, 196);
+            this.btnAdauga.Location = new System.Drawing.Point(209, 296);
             this.btnAdauga.Name = "btnAdauga";
             this.btnAdauga.Size = new System.Drawing.Size(100, 30);
             this.btnAdauga.TabIndex = 8;
@@ -126,7 +138,7 @@ namespace PersonalBudget_Formular
             // btnSold
             // 
             this.btnSold.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnSold.Location = new System.Drawing.Point(46, 196);
+            this.btnSold.Location = new System.Drawing.Point(89, 296);
             this.btnSold.Name = "btnSold";
             this.btnSold.Size = new System.Drawing.Size(101, 30);
             this.btnSold.TabIndex = 9;
@@ -137,7 +149,7 @@ namespace PersonalBudget_Formular
             // btnAfisare
             // 
             this.btnAfisare.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnAfisare.Location = new System.Drawing.Point(46, 250);
+            this.btnAfisare.Location = new System.Drawing.Point(89, 342);
             this.btnAfisare.Name = "btnAfisare";
             this.btnAfisare.Size = new System.Drawing.Size(101, 30);
             this.btnAfisare.TabIndex = 10;
@@ -147,9 +159,9 @@ namespace PersonalBudget_Formular
             // 
             // lblInfo
             // 
-            this.lblInfo.Location = new System.Drawing.Point(305, 48);
+            this.lblInfo.Location = new System.Drawing.Point(352, 45);
             this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(449, 370);
+            this.lblInfo.Size = new System.Drawing.Size(508, 370);
             this.lblInfo.TabIndex = 11;
             this.lblInfo.Text = "";
             // 
@@ -164,11 +176,152 @@ namespace PersonalBudget_Formular
             this.lblTitlu.TabIndex = 12;
             this.lblTitlu.Text = "MENIU CONTURI";
             // 
+            // btnCauta
+            // 
+            this.btnCauta.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnCauta.Location = new System.Drawing.Point(209, 342);
+            this.btnCauta.Name = "btnCauta";
+            this.btnCauta.Size = new System.Drawing.Size(100, 28);
+            this.btnCauta.TabIndex = 13;
+            this.btnCauta.Text = "Cauta";
+            this.btnCauta.UseVisualStyleBackColor = true;
+            this.btnCauta.Click += new System.EventHandler(this.btnCauta_Click);
+            // 
+            // btnModifica
+            // 
+            this.btnModifica.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnModifica.Location = new System.Drawing.Point(89, 390);
+            this.btnModifica.Name = "btnModifica";
+            this.btnModifica.Size = new System.Drawing.Size(101, 28);
+            this.btnModifica.TabIndex = 14;
+            this.btnModifica.Text = "Modifica";
+            this.btnModifica.UseVisualStyleBackColor = true;
+            this.btnModifica.Click += new System.EventHandler(this.btnModifica_Click);
+            // 
+            // rbtUSD
+            // 
+            this.rbtUSD.AutoSize = true;
+            this.rbtUSD.Location = new System.Drawing.Point(121, 171);
+            this.rbtUSD.Name = "rbtUSD";
+            this.rbtUSD.Size = new System.Drawing.Size(58, 21);
+            this.rbtUSD.TabIndex = 15;
+            this.rbtUSD.TabStop = true;
+            this.rbtUSD.Text = "USD";
+            this.rbtUSD.UseVisualStyleBackColor = true;
+            // 
+            // lblValuta
+            // 
+            this.lblValuta.AutoSize = true;
+            this.lblValuta.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblValuta.Location = new System.Drawing.Point(12, 173);
+            this.lblValuta.Name = "lblValuta";
+            this.lblValuta.Size = new System.Drawing.Size(54, 17);
+            this.lblValuta.TabIndex = 16;
+            this.lblValuta.Text = "Valuta";
+            // 
+            // rbtEUR
+            // 
+            this.rbtEUR.AutoSize = true;
+            this.rbtEUR.Location = new System.Drawing.Point(185, 171);
+            this.rbtEUR.Name = "rbtEUR";
+            this.rbtEUR.Size = new System.Drawing.Size(58, 21);
+            this.rbtEUR.TabIndex = 17;
+            this.rbtEUR.TabStop = true;
+            this.rbtEUR.Text = "EUR";
+            this.rbtEUR.UseVisualStyleBackColor = true;
+            // 
+            // rbtGBP
+            // 
+            this.rbtGBP.AutoSize = true;
+            this.rbtGBP.Location = new System.Drawing.Point(249, 171);
+            this.rbtGBP.Name = "rbtGBP";
+            this.rbtGBP.Size = new System.Drawing.Size(58, 21);
+            this.rbtGBP.TabIndex = 18;
+            this.rbtGBP.TabStop = true;
+            this.rbtGBP.Text = "GBP";
+            this.rbtGBP.UseVisualStyleBackColor = true;
+            // 
+            // rbtCAD
+            // 
+            this.rbtCAD.AutoSize = true;
+            this.rbtCAD.Location = new System.Drawing.Point(151, 198);
+            this.rbtCAD.Name = "rbtCAD";
+            this.rbtCAD.Size = new System.Drawing.Size(57, 21);
+            this.rbtCAD.TabIndex = 19;
+            this.rbtCAD.TabStop = true;
+            this.rbtCAD.Text = "CAD";
+            this.rbtCAD.UseVisualStyleBackColor = true;
+            // 
+            // rbtRON
+            // 
+            this.rbtRON.AutoSize = true;
+            this.rbtRON.Location = new System.Drawing.Point(224, 198);
+            this.rbtRON.Name = "rbtRON";
+            this.rbtRON.Size = new System.Drawing.Size(60, 21);
+            this.rbtRON.TabIndex = 20;
+            this.rbtRON.TabStop = true;
+            this.rbtRON.Text = "RON";
+            this.rbtRON.UseVisualStyleBackColor = true;
+            // 
+            // ckbEconomii
+            // 
+            this.ckbEconomii.AutoSize = true;
+            this.ckbEconomii.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.ckbEconomii.Location = new System.Drawing.Point(138, 228);
+            this.ckbEconomii.Name = "ckbEconomii";
+            this.ckbEconomii.Size = new System.Drawing.Size(155, 21);
+            this.ckbEconomii.TabIndex = 21;
+            this.ckbEconomii.Text = "Adauga Economii";
+            this.ckbEconomii.UseVisualStyleBackColor = true;
+            this.ckbEconomii.CheckedChanged += new System.EventHandler(this.ckbEconomii_CheckedChanged);
+            // 
+            // lblEconomii
+            // 
+            this.lblEconomii.AutoSize = true;
+            this.lblEconomii.Enabled = false;
+            this.lblEconomii.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblEconomii.Location = new System.Drawing.Point(15, 255);
+            this.lblEconomii.Name = "lblEconomii";
+            this.lblEconomii.Size = new System.Drawing.Size(73, 17);
+            this.lblEconomii.TabIndex = 22;
+            this.lblEconomii.Text = "Economii";
+            // 
+            // txtEconomii
+            // 
+            this.txtEconomii.Enabled = false;
+            this.txtEconomii.Location = new System.Drawing.Point(121, 255);
+            this.txtEconomii.Name = "txtEconomii";
+            this.txtEconomii.Size = new System.Drawing.Size(186, 22);
+            this.txtEconomii.TabIndex = 23;
+            // 
+            // btnResetare
+            // 
+            this.btnResetare.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnResetare.Location = new System.Drawing.Point(209, 390);
+            this.btnResetare.Name = "btnResetare";
+            this.btnResetare.Size = new System.Drawing.Size(100, 27);
+            this.btnResetare.TabIndex = 24;
+            this.btnResetare.Text = "Resetare";
+            this.btnResetare.UseVisualStyleBackColor = true;
+            this.btnResetare.Click += new System.EventHandler(this.btnResetare_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(872, 486);
+            this.Controls.Add(this.btnResetare);
+            this.Controls.Add(this.txtEconomii);
+            this.Controls.Add(this.lblEconomii);
+            this.Controls.Add(this.ckbEconomii);
+            this.Controls.Add(this.rbtRON);
+            this.Controls.Add(this.rbtCAD);
+            this.Controls.Add(this.rbtGBP);
+            this.Controls.Add(this.rbtEUR);
+            this.Controls.Add(this.lblValuta);
+            this.Controls.Add(this.rbtUSD);
+            this.Controls.Add(this.btnModifica);
+            this.Controls.Add(this.btnCauta);
             this.Controls.Add(this.lblTitlu);
             this.Controls.Add(this.lblInfo);
             this.Controls.Add(this.btnAfisare);
@@ -204,6 +357,18 @@ namespace PersonalBudget_Formular
         private System.Windows.Forms.Button btnAfisare;
         private System.Windows.Forms.RichTextBox lblInfo;
         private System.Windows.Forms.Label lblTitlu;
+        private System.Windows.Forms.Button btnCauta;
+        private System.Windows.Forms.Button btnModifica;
+        private System.Windows.Forms.RadioButton rbtUSD;
+        private System.Windows.Forms.Label lblValuta;
+        private System.Windows.Forms.RadioButton rbtEUR;
+        private System.Windows.Forms.RadioButton rbtGBP;
+        private System.Windows.Forms.RadioButton rbtCAD;
+        private System.Windows.Forms.RadioButton rbtRON;
+        private System.Windows.Forms.CheckBox ckbEconomii;
+        private System.Windows.Forms.Label lblEconomii;
+        private System.Windows.Forms.TextBox txtEconomii;
+        private System.Windows.Forms.Button btnResetare;
     }
 }
 

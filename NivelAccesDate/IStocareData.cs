@@ -8,5 +8,7 @@ namespace NivelAccesDate
     {
         void AddCont(Cont s);
         ArrayList GetConturi();
+        Cont GetCont(string nume, string prenume);
+        bool UpdateCont(Cont c);
     }
 }
