@@ -54,6 +54,11 @@ namespace PersonalBudget_Formular
             this.lblEconomii = new System.Windows.Forms.Label();
             this.txtEconomii = new System.Windows.Forms.TextBox();
             this.btnResetare = new System.Windows.Forms.Button();
+            this.listAfisare = new System.Windows.Forms.ListBox();
+            this.cmbDurata = new System.Windows.Forms.ComboBox();
+            this.Monede = new System.Windows.Forms.GroupBox();
+            this.lblDurata = new System.Windows.Forms.Label();
+            this.Monede.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblNume
@@ -159,9 +164,9 @@ namespace PersonalBudget_Formular
             // 
             // lblInfo
             // 
-            this.lblInfo.Location = new System.Drawing.Point(352, 45);
+            this.lblInfo.Location = new System.Drawing.Point(334, 45);
             this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(508, 370);
+            this.lblInfo.Size = new System.Drawing.Size(455, 65);
             this.lblInfo.TabIndex = 11;
             this.lblInfo.Text = "";
             // 
@@ -201,7 +206,7 @@ namespace PersonalBudget_Formular
             // rbtUSD
             // 
             this.rbtUSD.AutoSize = true;
-            this.rbtUSD.Location = new System.Drawing.Point(121, 171);
+            this.rbtUSD.Location = new System.Drawing.Point(6, 5);
             this.rbtUSD.Name = "rbtUSD";
             this.rbtUSD.Size = new System.Drawing.Size(58, 21);
             this.rbtUSD.TabIndex = 15;
@@ -222,7 +227,7 @@ namespace PersonalBudget_Formular
             // rbtEUR
             // 
             this.rbtEUR.AutoSize = true;
-            this.rbtEUR.Location = new System.Drawing.Point(185, 171);
+            this.rbtEUR.Location = new System.Drawing.Point(73, 5);
             this.rbtEUR.Name = "rbtEUR";
             this.rbtEUR.Size = new System.Drawing.Size(58, 21);
             this.rbtEUR.TabIndex = 17;
@@ -233,7 +238,7 @@ namespace PersonalBudget_Formular
             // rbtGBP
             // 
             this.rbtGBP.AutoSize = true;
-            this.rbtGBP.Location = new System.Drawing.Point(249, 171);
+            this.rbtGBP.Location = new System.Drawing.Point(137, 5);
             this.rbtGBP.Name = "rbtGBP";
             this.rbtGBP.Size = new System.Drawing.Size(58, 21);
             this.rbtGBP.TabIndex = 18;
@@ -244,7 +249,7 @@ namespace PersonalBudget_Formular
             // rbtCAD
             // 
             this.rbtCAD.AutoSize = true;
-            this.rbtCAD.Location = new System.Drawing.Point(151, 198);
+            this.rbtCAD.Location = new System.Drawing.Point(39, 32);
             this.rbtCAD.Name = "rbtCAD";
             this.rbtCAD.Size = new System.Drawing.Size(57, 21);
             this.rbtCAD.TabIndex = 19;
@@ -255,7 +260,7 @@ namespace PersonalBudget_Formular
             // rbtRON
             // 
             this.rbtRON.AutoSize = true;
-            this.rbtRON.Location = new System.Drawing.Point(224, 198);
+            this.rbtRON.Location = new System.Drawing.Point(112, 32);
             this.rbtRON.Name = "rbtRON";
             this.rbtRON.Size = new System.Drawing.Size(60, 21);
             this.rbtRON.TabIndex = 20;
@@ -305,21 +310,68 @@ namespace PersonalBudget_Formular
             this.btnResetare.UseVisualStyleBackColor = true;
             this.btnResetare.Click += new System.EventHandler(this.btnResetare_Click);
             // 
+            // listAfisare
+            // 
+            this.listAfisare.FormattingEnabled = true;
+            this.listAfisare.ItemHeight = 16;
+            this.listAfisare.Location = new System.Drawing.Point(334, 134);
+            this.listAfisare.Name = "listAfisare";
+            this.listAfisare.Size = new System.Drawing.Size(455, 324);
+            this.listAfisare.TabIndex = 25;
+            this.listAfisare.SelectedIndexChanged += new System.EventHandler(this.listAfisare_SelectedIndexChanged);
+            // 
+            // cmbDurata
+            // 
+            this.cmbDurata.FormattingEnabled = true;
+            this.cmbDurata.Items.AddRange(new object[] {
+            "1",
+            "3",
+            "6",
+            "12",
+            "24"});
+            this.cmbDurata.Location = new System.Drawing.Point(121, 434);
+            this.cmbDurata.Name = "cmbDurata";
+            this.cmbDurata.Size = new System.Drawing.Size(188, 24);
+            this.cmbDurata.TabIndex = 26;
+            this.cmbDurata.SelectedIndexChanged += new System.EventHandler(this.cmbDurata_SelectedIndexChanged);
+            // 
+            // Monede
+            // 
+            this.Monede.Controls.Add(this.rbtRON);
+            this.Monede.Controls.Add(this.rbtCAD);
+            this.Monede.Controls.Add(this.rbtGBP);
+            this.Monede.Controls.Add(this.rbtEUR);
+            this.Monede.Controls.Add(this.rbtUSD);
+            this.Monede.Location = new System.Drawing.Point(112, 166);
+            this.Monede.Name = "Monede";
+            this.Monede.Size = new System.Drawing.Size(196, 62);
+            this.Monede.TabIndex = 27;
+            this.Monede.TabStop = false;
+            // 
+            // lblDurata
+            // 
+            this.lblDurata.AutoSize = true;
+            this.lblDurata.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblDurata.Location = new System.Drawing.Point(18, 440);
+            this.lblDurata.Name = "lblDurata";
+            this.lblDurata.Size = new System.Drawing.Size(100, 17);
+            this.lblDurata.TabIndex = 28;
+            this.lblDurata.Text = "Durata (luni)";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(872, 486);
+            this.Controls.Add(this.lblDurata);
+            this.Controls.Add(this.Monede);
+            this.Controls.Add(this.cmbDurata);
+            this.Controls.Add(this.listAfisare);
             this.Controls.Add(this.btnResetare);
             this.Controls.Add(this.txtEconomii);
             this.Controls.Add(this.lblEconomii);
             this.Controls.Add(this.ckbEconomii);
-            this.Controls.Add(this.rbtRON);
-            this.Controls.Add(this.rbtCAD);
-            this.Controls.Add(this.rbtGBP);
-            this.Controls.Add(this.rbtEUR);
             this.Controls.Add(this.lblValuta);
-            this.Controls.Add(this.rbtUSD);
             this.Controls.Add(this.btnModifica);
             this.Controls.Add(this.btnCauta);
             this.Controls.Add(this.lblTitlu);
@@ -337,6 +389,8 @@ namespace PersonalBudget_Formular
             this.Controls.Add(this.lblNume);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Monede.ResumeLayout(false);
+            this.Monede.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -369,6 +423,10 @@ namespace PersonalBudget_Formular
         private System.Windows.Forms.Label lblEconomii;
         private System.Windows.Forms.TextBox txtEconomii;
         private System.Windows.Forms.Button btnResetare;
+        private System.Windows.Forms.ListBox listAfisare;
+        private System.Windows.Forms.ComboBox cmbDurata;
+        private System.Windows.Forms.GroupBox Monede;
+        private System.Windows.Forms.Label lblDurata;
     }
 }
 

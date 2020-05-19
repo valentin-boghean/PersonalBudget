@@ -1,6 +1,7 @@
 ﻿using ContModel;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 namespace NivelAccesDate
@@ -45,9 +46,9 @@ namespace NivelAccesDate
             }
         }
 
-        public ArrayList GetConturi()
+        public List<Cont> GetConturi()
         {
-            ArrayList conturi = new ArrayList();
+            List<Cont> conturi = new List<Cont>();
 
             try
             {
@@ -105,9 +106,39 @@ namespace NivelAccesDate
             return null;
         }
 
+        public Cont GetContByIndex(int index)
+        {
+            try
+            {
+                // instructiunea 'using' va apela sr.Close()
+                using (StreamReader sr = new StreamReader(NumeFisier))
+                {
+                    string line;
+                    int contor = 0;
+                    //citeste cate o linie si creaza un obiect de tip Student pe baza datelor din linia citita
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        Cont cont = new Cont(line);
+                        if (contor == index)
+                            return cont;
+                        contor++;
+                    }
+                }
+            }
+            catch (IOException eIO)
+            {
+                throw new Exception("Eroare la deschiderea fisierului. Mesaj: " + eIO.Message);
+            }
+            catch (Exception eGen)
+            {
+                throw new Exception("Eroare generica. Mesaj: " + eGen.Message);
+            }
+            return null;
+        }
+
         public bool UpdateCont(Cont contActualizat)
         {
-            ArrayList conturi = GetConturi();
+            List<Cont> conturi = GetConturi();
             bool actualizareCuSucces = false;
             try
             {

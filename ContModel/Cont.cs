@@ -31,6 +31,8 @@ namespace ContModel
         public float Sold { get ; set; }          //Soldul bancar fara Economiii
         public Boolean Status = true;            //Cont inchis sau deschis
         public Valuta Moneda { get; set; }
+
+        public int Durata { get; set; }
         public string Afisare()
         {
             string afisare;
@@ -103,7 +105,9 @@ namespace ContModel
                         Int32.TryParse(sir, out temp);
                         Cheltuieli = temp;
                         break;
-             
+                    case 7:
+                        Durata = Int32.Parse(sir);
+                        break;
                     default:
                         break;
 
@@ -130,15 +134,15 @@ namespace ContModel
 
         public string ConversieLaSir()
         {
-            string s = string.Format("{0,-2}{1,10}{2,10}{3,10}{4,10}{5,15}{6,15}", IdCont, Nume,Prenume, Sold, Moneda, Venit, Cheltuieli);
+            string s = string.Format("{0,-2}{1,10}{2,10}{3,10}{4,10}{5,15}{6,15}{7,10}", IdCont, Nume,Prenume, Sold, Moneda, Venit, Cheltuieli,Durata);
             return s;        
         }
 
         public string ConversieLaSir_PentruFisier()
         {
             
-            string s = string.Format("{1}{0}{2}{0}{3}{0}{4}{0}{5}{0}{6}{0}{7}",
-                SEPARATOR_PRINCIPAL_FISIER, IdCont.ToString(), (Nume ?? " NECUNOSCUT "), (Prenume ?? " NECUNOSCUT "), Sold, Moneda,Venit,Cheltuieli);
+            string s = string.Format("{1}{0}{2}{0}{3}{0}{4}{0}{5}{0}{6}{0}{7}{0}{8}",
+                SEPARATOR_PRINCIPAL_FISIER, IdCont.ToString(), (Nume ?? " NECUNOSCUT "), (Prenume ?? " NECUNOSCUT "), Sold, Moneda,Venit,Cheltuieli,Durata);
 
             return s;
         }

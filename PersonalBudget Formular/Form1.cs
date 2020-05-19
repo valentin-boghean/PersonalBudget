@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using ContModel;
 using NivelAccesDate;
+using System.Collections.Generic;
 
 namespace PersonalBudget_Formular
 {
@@ -34,18 +35,18 @@ namespace PersonalBudget_Formular
 
         private void btnAfisare_Click(object sender, EventArgs e)
         {
-            lblInfo.Text = string.Empty;
-            ArrayList conturi;
-            conturi = adminConturi.GetConturi();
-         
+            listAfisare.Items.Clear();
+            List<Cont> conturi = adminConturi.GetConturi();
+        
 
             var header = string.Format("{0,-2}{1,10}{2,10}{3,10}{4,10}{5,15}{6,15}", "ID", "Nume", "Prenume", "Sold", "Valuta", "Venit/Luna", "Cheltuieli");
-            lblInfo.Text = lblInfo.Text + header;
-            lblInfo.Text = lblInfo.Text + "\n-----------------------------------------------------------------------------------------------------------";
-
+            header = header + "\n-----------------------------------------------------------------------------------------------------------";
+            listAfisare.Items.Add(header);
             foreach (Cont cont in conturi)
-                lblInfo.Text = lblInfo.Text + "\n" + cont.ConversieLaSir();
-            lblInfo.ForeColor = Color.Black;
+            {
+                var linieTabel = String.Format("{0,-2}{1,10}{2,10}{3,10}{4,10}{5,15}{6,15}", cont.IdCont, cont.Nume, cont.Prenume, cont.Sold, cont.Moneda, cont.Venit, cont.Cheltuieli);
+                listAfisare.Items.Add(linieTabel);
+            }
         }
 
         private void btnAdauga_Click(object sender, EventArgs e)
@@ -86,7 +87,7 @@ namespace PersonalBudget_Formular
                 }
                 lblInfo.ForeColor = Color.Red;
                 lblInfo.Text = "Contul a fost adaugat";
-
+                s.Durata = Int32.Parse(cmbDurata.Text);
                 adminConturi.AddCont(s);
             }
         }
@@ -160,7 +161,7 @@ namespace PersonalBudget_Formular
                 s.Cheltuieli = intCheltuieli;
                 lblInfo.Text = s.ConversieLaSir();
                 s.Sold = Convert.ToInt32(txtVenit.Text) - Convert.ToInt32(txtCheltuieli.Text);
-                
+                s.Durata = Int32.Parse(cmbDurata.Text);
                 adminConturi.UpdateCont(s);
             }
             else
@@ -171,6 +172,12 @@ namespace PersonalBudget_Formular
 
         private void ResetareControale()
         {
+            lblNume.ForeColor = Color.Black;
+            lblPrenume.ForeColor = Color.Black;
+            lblVenit.ForeColor = Color.Black;
+            lblCheltuieli.ForeColor = Color.Black;
+            lblValuta.ForeColor = Color.Black;
+            lblEconomii.ForeColor = Color.Black;
             lblEconomii.Enabled = false;
             txtEconomii.Enabled = false;
         }
@@ -193,5 +200,36 @@ namespace PersonalBudget_Formular
         {
             ResetareControale();
         }
+
+        private void listAfisare_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ResetareControale();
+            Cont c = adminConturi.GetContByIndex(listAfisare.SelectedIndex - 1);
+            if (c!= null)
+            {
+                txtNume.Text = c.Nume;
+                txtPrenume.Text = c.Prenume;
+                txtCheltuieli.Text = Convert.ToString(c.Cheltuieli);
+                txtVenit.Text = Convert.ToString(c.Venit);
+
+                foreach(var Moneda in Monede.Controls)
+                {
+                    var monedaBox = Moneda as RadioButton;
+                    if(monedaBox.Text == c.Moneda.ToString())
+                    {
+                        monedaBox.Checked = true;
+                    }
+                }
+                cmbDurata.Text = c.Durata.ToString();
+                
+            }
+        }
+
+        private void cmbDurata_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+     
     }
 }
