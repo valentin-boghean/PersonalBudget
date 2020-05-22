@@ -17,7 +17,8 @@ namespace ContModel
         private const int CHELTUIELI = 6;
 
         private const char SEPARATOR_PRINCIPAL_FISIER = ';';
-        
+
+        public DateTime dataActualizare;
         public int IdCont { get; set; }
         public string Nume { get; set; }         //Numele detinatorului contului
         public string Prenume { get; set; }
@@ -54,6 +55,7 @@ namespace ContModel
 
         public Cont()
         {
+            dataActualizare = DateTime.Now;
             Nume = string.Empty;           
             Detalii = string.Empty;
 
@@ -61,7 +63,7 @@ namespace ContModel
 
         public Cont(string _nume, string _prenume, int _venit, int _cheltuieli)
         {
-
+            dataActualizare = DateTime.Now;
             Nume = _nume;
             Prenume = _prenume;
             Venit = (float)_venit;
@@ -75,14 +77,16 @@ namespace ContModel
             string[] SirInput = new string[_SirInput.Length];
             SirInput = _SirInput.Split(';');
             int temp;
-            int i = 0;
+            int i = -1;
             foreach (string sir in SirInput)
             {
                 switch(i)
                 {
-                    case 0:      
+                    case -1:      
                         Int32.TryParse(sir, out temp);
                         IdCont = temp;                    
+                        break;
+                    case 0: dataActualizare = DateTime.Parse(sir);
                         break;
                     case 1:
                         Nume = sir;
@@ -134,15 +138,15 @@ namespace ContModel
 
         public string ConversieLaSir()
         {
-            string s = string.Format("{0,-2}{1,10}{2,10}{3,10}{4,10}{5,15}{6,15}{7,10}", IdCont, Nume,Prenume, Sold, Moneda, Venit, Cheltuieli,Durata);
+            string s = string.Format("{0,-2}{8,30}{1,10}{2,10}{3,10}{4,10}{5,15}{6,15}{7,10}", IdCont, Nume,Prenume, Sold, Moneda, Venit, Cheltuieli, Durata,dataActualizare);
             return s;        
         }
 
         public string ConversieLaSir_PentruFisier()
         {
             
-            string s = string.Format("{1}{0}{2}{0}{3}{0}{4}{0}{5}{0}{6}{0}{7}{0}{8}",
-                SEPARATOR_PRINCIPAL_FISIER, IdCont.ToString(), (Nume ?? " NECUNOSCUT "), (Prenume ?? " NECUNOSCUT "), Sold, Moneda,Venit,Cheltuieli,Durata);
+            string s = string.Format("{1}{0}{9}{0}{2}{0}{3}{0}{4}{0}{5}{0}{6}{0}{7}{0}{8}",
+                SEPARATOR_PRINCIPAL_FISIER, IdCont.ToString(), (Nume ?? " NECUNOSCUT "), (Prenume ?? " NECUNOSCUT "), Sold, Moneda,Venit,Cheltuieli,Durata, dataActualizare);
 
             return s;
         }

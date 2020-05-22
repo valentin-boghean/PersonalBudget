@@ -166,7 +166,7 @@ namespace PersonalBudget_Formular
             // 
             this.lblInfo.Location = new System.Drawing.Point(334, 45);
             this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(455, 65);
+            this.lblInfo.Size = new System.Drawing.Size(713, 65);
             this.lblInfo.TabIndex = 11;
             this.lblInfo.Text = "";
             // 
@@ -316,7 +316,7 @@ namespace PersonalBudget_Formular
             this.listAfisare.ItemHeight = 16;
             this.listAfisare.Location = new System.Drawing.Point(334, 134);
             this.listAfisare.Name = "listAfisare";
-            this.listAfisare.Size = new System.Drawing.Size(455, 324);
+            this.listAfisare.Size = new System.Drawing.Size(713, 324);
             this.listAfisare.TabIndex = 25;
             this.listAfisare.SelectedIndexChanged += new System.EventHandler(this.listAfisare_SelectedIndexChanged);
             // 
@@ -362,7 +362,7 @@ namespace PersonalBudget_Formular
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(872, 486);
+            this.ClientSize = new System.Drawing.Size(1074, 486);
             this.Controls.Add(this.lblDurata);
             this.Controls.Add(this.Monede);
             this.Controls.Add(this.cmbDurata);

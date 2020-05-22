@@ -38,13 +38,13 @@ namespace PersonalBudget_Formular
             listAfisare.Items.Clear();
             List<Cont> conturi = adminConturi.GetConturi();
         
-
-            var header = string.Format("{0,-2}{1,10}{2,10}{3,10}{4,10}{5,15}{6,15}", "ID", "Nume", "Prenume", "Sold", "Valuta", "Venit/Luna", "Cheltuieli");
+            
+            var header = string.Format("{0,-2}{7,30}{1,10}{2,10}{3,10}{4,10}{5,15}{6,15}", "ID", "Nume", "Prenume", "Sold", "Valuta", "Venit/Luna", "Cheltuieli","Data actualizare");
             header = header + "\n-----------------------------------------------------------------------------------------------------------";
             listAfisare.Items.Add(header);
             foreach (Cont cont in conturi)
             {
-                var linieTabel = String.Format("{0,-2}{1,10}{2,10}{3,10}{4,10}{5,15}{6,15}", cont.IdCont, cont.Nume, cont.Prenume, cont.Sold, cont.Moneda, cont.Venit, cont.Cheltuieli);
+                var linieTabel = String.Format("{0,-2}{7,30}{1,10}{2,10}{3,10}{4,10}{5,15}{6,15}", cont.IdCont, cont.Nume, cont.Prenume, cont.Sold, cont.Moneda, cont.Venit, cont.Cheltuieli, cont.dataActualizare);
                 listAfisare.Items.Add(linieTabel);
             }
         }
@@ -129,45 +129,17 @@ namespace PersonalBudget_Formular
 
         private void btnCauta_Click(object sender, EventArgs e)
         {
-            Cont s = adminConturi.GetCont(txtNume.Text, txtPrenume.Text);
-            if (s != null)
-            {
-                lblInfo.Text = s.ConversieLaSir();
-            }
-            else
-                lblInfo.Text = "Nu s-a gasit studentul";
-            if (txtNume.Enabled == true && txtPrenume.Enabled == true)
-            {
-                txtNume.Enabled = false;
-                txtPrenume.Enabled = false;
-            }
-            else
-            {
-                txtNume.Enabled = true;
-                txtPrenume.Enabled = true;
-            }
+          
+            Form3 FormaNoua = new Form3();
+            FormaNoua.Show();
+     
         }
 
         private void btnModifica_Click(object sender, EventArgs e)
         {
             Cont s = adminConturi.GetCont(txtNume.Text, txtPrenume.Text);
-            if (s != null)
-            {
-                int intVenit;
-                Int32.TryParse(txtVenit.Text, out intVenit);
-                int intCheltuieli;
-                Int32.TryParse(txtCheltuieli.Text, out intCheltuieli);
-                s.Venit = intVenit;
-                s.Cheltuieli = intCheltuieli;
-                lblInfo.Text = s.ConversieLaSir();
-                s.Sold = Convert.ToInt32(txtVenit.Text) - Convert.ToInt32(txtCheltuieli.Text);
-                s.Durata = Int32.Parse(cmbDurata.Text);
-                adminConturi.UpdateCont(s);
-            }
-            else
-            {
-                lblInfo.Text = "Cont inexistent";
-            }
+            Form2 FormaNoua = new Form2(s);
+            FormaNoua.Show();
         }
 
         private void ResetareControale()
